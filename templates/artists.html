@@ -1,0 +1,69 @@
+{% extends "main.html" %}
+{% block content %}
+<!--
+	<div class="row divider blue padding-none">
+		<div class="col-xs-8 col-sm-12 col-md-12 col-lg-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+		<div class="col-xs-6 col-sm-9 col-md-9 col-lg-9">
+			<h1>Artist Commnity</h1>
+		</div>
+		<div class="col-xs-1 col-sm-2 col-md-1 col-lg-1">
+		{% include "header.html" %}
+		</div>
+	</div>
+-->
+
+{% include "header.html" %}
+<div class = 'flash'>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+{% include "jssslider1.html" %}
+
+<div class="row">
+{% include "jssslider2.html" %}
+
+        	{% for item in paintings %}
+            <div style="display: none;">
+                <img data-u="image" src="{{url_for('send_file',filename = item.filename)}}"/>
+            </div>
+            {% endfor %}
+{% include "jssslider3.html" %}
+
+</div> <!-- End Row  -->
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			<a href="{{url_for('newArtist')}}">
+				<button class="btn btn-default" id="new-artist">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Artist
+				</button>
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	{% for artist in artists %}
+		<a href = "{{url_for('showPainting', artist_id = artist.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-3 artist-list thumbnail">
+						<h3>{{artist.name}}</h3>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+	{% endfor %}
+{% endblock %}

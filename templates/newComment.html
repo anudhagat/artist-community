@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-none">
+			<h1>{{painting.name}}</h1>
+			<img src="{{url_for('send_file',filename = painting.filename)}}" alt="Painting Image" width="300" height="300">
+		</div>
+		<div class="col-md-4 padding-top">
+			<form action="#" method = "post" id="commentForm">
+				<div class="form-group">
+				<label for="content">Comment:</label>
+				<textarea class="form-control" form="commentForm" maxlength="100" name="content"></textarea>
+				<div class="padding-bottom"></div>
+				<button type="submit" class="btn btn-default" id="submit" type="submit">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Submit</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1 padding-top">
+			{% for comment in comments %}
+			<div class="well">
+				<h3>From {{comment.creator}} at {{comment.time}}:</h3>
+				<p>{{comment.content}}</p>
+
+				{% if session['user_id'] == painting.user_id %}
+					<a href='{{url_for('deleteComment',artist_id=artist_id, painting_id=painting.id, comment_id=comment.id) }}'>Delete</a>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+
+	</div>
+{% endblock %}

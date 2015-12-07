@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>New Painting</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action=""{{ url_for('newPainting',artist_id = artist_id, showMenu=showMenu)}}"" method = "post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type ="text" maxlength="50" class="form-control" name="name"placeholder="Name of the painting">
+
+					<label for="description">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description of the painting"></textarea>
+
+					<label for="price">Price:</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type ="text" class="form-control" maxlength="10" name="price" placeholder="Price in $">
+					</div>
+
+					<label for="image">Image:</label>
+					<input type ="file" class="form-control" maxlength="250" name="filename" >
+
+					<label for="category">Category:</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="category1" value="Landscape">Landscape
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="category2" value="Portrait">Portrait
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="category3" value="Still Life">Still Life
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="category4" value="Genre Painting">Genre Painting
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="category5" value="History Painting">History Painting
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="category6" value="Modern">Modern
+					  </label>
+					</div>
+					<button type="submit" class="btn btn-default" id="submit" type="submit">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $.uploadPreview({
+    input_field: "#image-upload",   // Default: .image-upload
+    preview_box: "#image-preview",  // Default: .image-preview
+    label_field: "#image-label",    // Default: .image-label
+    label_default: "Choose File",   // Default: Choose File
+    label_selected: "Change File",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+</script>

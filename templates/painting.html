@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ artist.name }}
+			<p>{{artist.description}}</p>
+			<figure class="creator">
+				<img src="{{ creator.picture }}">
+				<figcaption>{{ creator.name}}</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+	{% if items !=[] %}
+
+		{% for i in items %}
+			<div class="row">
+
+				<div class="col-md-1"></div>
+				<div class="col-md-7 painting-item">
+					<h3>{{i.name}}</h3>
+					<img src= "{{url_for('send_file',filename =i.filename)}}" alt="Painting Image" width="200" height="200">
+					<p>{{i.description}}</p>
+
+					<p class="painting-price">{{i.price}}</p>
+					<p>{{i.category}}</p>
+					<a href='{{url_for('editPainting', artist_id = artist.id, painting_id=i.id ) }}'>Edit</a> |
+					<a href='{{url_for('deletePainting', artist_id = artist.id, painting_id=i.id ) }}'>Delete</a> |
+					<a href='{{url_for('newComment', artist_id = artist.id, painting_id=i.id ) }}'>Comment</a>
+				</div>
+			</div>
+
+		{% endfor %}
+	{% else %}
+			<div class="col-md-1"></div>
+			<div class="col-md-7 painting-item">
+				<p>No Paintings Found for this Artist.</p>
+			</div>
+	{% endif %}
+{% endblock %}

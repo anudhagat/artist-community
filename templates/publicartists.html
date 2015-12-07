@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+{% block content %}
+
+	{% include "header.html" %}
+
+	<div class = 'flash'>
+	{% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+			<h1 class="text-center"> Artists </h1>
+			<div class="row">
+
+			{% for artist in artists %}
+				<a href = "{{url_for('showPainting', artist_id = artist.id)}}">
+				<div class="text-center artist-list">
+					<h3>{{artist.name}}</h3>
+				</div>
+
+				</a>
+			{% endfor %}
+			</div>
+
+		</div>
+
+		<div class="col-xs-3 col-sm-8 col-md-8 col-lg-8">
+			<h1 class="text-center"> Latest Paintings </h1>
+			{% include "jssslider1.html" %}
+
+			<div class="row">
+			{% include "jssslider2.html" %}
+
+        		{% for item in paintings %}
+            		<div style="display: none;">
+                		<img data-u="image" src="{{url_for('send_file',filename = item.filename)}}"/>
+            		</div>
+            	{% endfor %}
+			{% include "jssslider3.html" %}
+
+			</div> <!-- End Row  -->
+		</div>
+	</div>
+
+{% endblock %}
