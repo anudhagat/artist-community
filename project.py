@@ -352,7 +352,7 @@ def newArtist():
 
 
 # Edit a artist
-@app.route('/restaurant/<int:artist_id>/edit/', methods=['GET', 'POST'])
+@app.route('/artist/<int:artist_id>/edit/', methods=['GET', 'POST'])
 def editArtist(artist_id):
 
     showMenu['showArtist'] = True
@@ -500,7 +500,7 @@ def newPainting(artist_id):
 # Edit a painting
 
 
-@app.route('/artist/<int:artist_id>/menu/<int:painting_id>/edit',
+@app.route('/artist/<int:artist_id>/painting/<int:painting_id>/edit',
            methods=['GET', 'POST'])
 def editPainting(artist_id, painting_id):
 
@@ -582,7 +582,7 @@ def deletePainting(artist_id, painting_id):
 # Add a Comment
 
 
-@app.route('/artist/<int:artist_id>/menu/<int:painting_id>/newcomment',
+@app.route('/artist/<int:artist_id>/painting/<int:painting_id>/newcomment',
            methods=['GET', 'POST'])
 def newComment(artist_id, painting_id):
 
